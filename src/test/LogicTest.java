@@ -3,9 +3,9 @@ package test;
 import main.Logic;
 import main.Player;
 import main.Result;
-import org.junit.*;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class LogicTest {

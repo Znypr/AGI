@@ -4,6 +4,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
     private final int MAX_TicTacToe = 9;
     private final int MAX_FourWins = 42;
+    private int MAX_Length;
 
     private final int ROWS;
     private final int COLS;
@@ -14,11 +15,13 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         COLS = col;
         ROWS = row;
         board = new Player[col][row];
+        MAX_Length = 3;
     }
     public Logic (){
         COLS = 7;
         ROWS = 6;
         board = new Player[COLS][ROWS];
+        MAX_Length = 4;
     }
 
     @Override
@@ -101,7 +104,6 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     private boolean checkWinHorizontal(Player chip, int row) {
         boolean wins = true;
         for (int i=0; i<COLS-2; i++) {
-
             for (int j=0; j<3; j++) { // 4 magic number
                 if(board[i+j][row] == null)
                     break;
@@ -130,7 +132,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     private boolean checkWinDiagonal(Player chip, int row, int column){
 
         int counter = 1;
-        for(int i = 1; i < 4;i++){
+        for(int i = 1; i < MAX_Length;i++){
             if (column-i >= 0 && row-i >= 0) {
               if(board[column-i][row-i] == chip){
                   counter += 1;
@@ -143,7 +145,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         }
 
         counter = 1;
-        for(int i = 1; i < 4;i++){
+        for(int i = 1; i < MAX_Length;i++){
             if (column+i < 7 && row+i < 6) {
                 if(board[column+i][row+i] == chip){
                     counter += 1;
@@ -156,7 +158,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         }
 
         counter = 1;
-        for(int i = 1; i < 4;i++){
+        for(int i = 1; i < MAX_Length;i++){
             if (column - i >= 0 && row+i < 6) {
                 if(board[column-i][row+i] == chip){
                     counter += 1;
@@ -169,7 +171,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         }
 
         counter = 1;
-        for(int i = 1; i < 4;i++){
+        for(int i = 1; i < MAX_Length;i++){
             if (column + i < 7 && row-i >= 0) {
                 if(board[column+i][row-i] == chip){
                     counter += 1;
