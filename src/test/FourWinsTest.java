@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class LogicTest {
+public class FourWinsTest {
 
     @Test
     public void checkIfOutOfBounds1() {

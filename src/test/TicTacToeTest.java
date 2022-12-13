@@ -31,6 +31,8 @@ public class TicTacToeTest {
         assertEquals(Result.WIN_BLUE, r);
     }
 
+
+
     @Test
     public void checkWinHorizontalCase1() {
 
@@ -54,6 +56,8 @@ public class TicTacToeTest {
         Result r = o.setChip(Player.BLUE, 2,2);
         assertEquals(Result.WIN_BLUE, r);
     }
+
+
 
     @Test
     public void checkWinVerticalCase1() {
@@ -79,8 +83,10 @@ public class TicTacToeTest {
         assertEquals(Result.WIN_BLUE, r);
     }
 
+
+
     @Test
-    public void checkIfOutOfBoundsCase1() {
+    public void checkOutOfBoundsCase1() {
 
         Logic o = new Logic(3,3);
 
@@ -89,7 +95,7 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void checkIfOutOfBoundsCase2() {
+    public void checkOutOfBoundsCase2() {
 
         Logic o = new Logic(3,3);
 
@@ -98,7 +104,7 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void checkIfOutOfBoundsCase3() {
+    public void checkOutOfBoundsCase3() {
 
         Logic o = new Logic(3,3);
 
@@ -107,13 +113,15 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void checkIfOutOfBoundsCase4() {
+    public void checkOutOfBoundsCase4() {
 
         Logic o = new Logic(3,3);
 
         Result r = o.setChip(Player.BLUE, 1,-1);
         assertEquals(Result.ERROR, r);
     }
+
+
 
     @Test
     public void checkIfAllocated() {
@@ -124,6 +132,8 @@ public class TicTacToeTest {
         Result r = o.setChip(Player.BLUE, 1,1);
         assertEquals(Result.ERROR, r);
     }
+
+
 
     @Test
     public void checkTie() {
