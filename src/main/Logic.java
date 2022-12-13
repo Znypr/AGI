@@ -102,10 +102,10 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         boolean wins = true;
         for (int i=0; i<COLS-2; i++) {
 
-            for (int j=i; j<j; j++) { // 4 magic number
-                if(board[j][row] == null)
+            for (int j=0; j<3; j++) { // 4 magic number
+                if(board[i+j][row] == null)
                     break;
-                wins &= board[j][row]==chip;
+                wins &= board[i+j][row]==chip;
             }
         }
         return wins;
