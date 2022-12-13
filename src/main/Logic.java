@@ -143,7 +143,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
         counter = 1;
         for(int i = 1; i < MAX_Length;i++){
-            if (column+i < 7 && row+i < 6) {
+            if (column+i < COLS && row+i < ROWS) {
                 if(board[column+i][row+i] == chip){
                     counter += 1;
                 }
@@ -156,7 +156,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
         counter = 1;
         for(int i = 1; i < MAX_Length;i++){
-            if (column - i >= 0 && row+i < 6) {
+            if (column - i >= 0 && row+i < ROWS) {
                 if(board[column-i][row+i] == chip){
                     counter += 1;
                 }
@@ -169,7 +169,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
         counter = 1;
         for(int i = 1; i < MAX_Length;i++){
-            if (column + i < 7 && row-i >= 0) {
+            if (column + i < COLS && row-i >= 0) {
                 if(board[column+i][row-i] == chip){
                     counter += 1;
                 }
