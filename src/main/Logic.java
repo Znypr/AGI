@@ -104,7 +104,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     private boolean checkWinHorizontal(Player chip, int row) {
         boolean wins = true;
         for (int i=0; i<COLS-2; i++) {
-            for (int j=0; j<3; j++) { // 4 magic number
+            for (int j=0; j<MAX_Length-1; j++) {
                 if(board[i+j][row] == null)
                     break;
                 wins &= board[i+j][row]==chip;
@@ -115,18 +115,15 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
     private boolean checkWinVertical(Player chip, int column) {
 
-        return board[column][0] == Player.BLUE &&
-                board[column][1] == Player.BLUE &&
-                board[column][2] == Player.BLUE &&
-                board[column][3] == Player.BLUE
-                || board[column][2] == Player.BLUE &&
-                board[column][3] == Player.BLUE &&
-                board[column][4] == Player.BLUE &&
-                board[column][5] == Player.BLUE
-                || board[column][1] == Player.BLUE &&
-                board[column][2] == Player.BLUE &&
-                board[column][3] == Player.BLUE &&
-                board[column][4] == Player.BLUE;
+        boolean wins = true;
+        for(int i=0; i<ROWS-2; i++) {
+            for(int j=0; j<MAX_Length-1; j++) {
+                if(board[column][i+j]==null)
+                    break;
+                wins &= board[column][i+j]==chip;
+            }
+        }
+        return wins;
     }
 
     private boolean checkWinDiagonal(Player chip, int row, int column){
