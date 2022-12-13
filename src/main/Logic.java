@@ -141,7 +141,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==4) {
+        if(counter==MAX_Length) {
             return true;
         }
 
@@ -154,7 +154,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==4) {
+        if(counter==MAX_Length) {
             return true;
         }
 
@@ -167,7 +167,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==4) {
+        if(counter==MAX_Length) {
             return true;
         }
 
@@ -180,7 +180,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        return counter == 4;
+        return counter == MAX_Length;
     }
 
 }
