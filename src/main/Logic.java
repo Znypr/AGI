@@ -2,8 +2,8 @@ package main;
 
 public class Logic implements FourWinsLogic, TicTacToeLogic {
 
-    private final int MAX_TicTacToe = 42;
-    private final int MAX_FourWins = 9;
+    private final int MAX_TicTacToe = 9;
+    private final int MAX_FourWins = 42;
 
     private final int ROWS;
     private final int COLS;
@@ -16,9 +16,9 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         board = new Player[col][row];
     }
     public Logic (){
-        COLS = 6;
-        ROWS = 7;
-        board = new Player[ROWS][COLS];
+        COLS = 7;
+        ROWS = 6;
+        board = new Player[COLS][ROWS];
     }
 
     @Override
@@ -49,9 +49,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             return Result.ERROR;
 
         int row = insert(chip,column);
-        if(row < 0) {
-            return Result.ERROR;
-        }
+        if(row < 0) return Result.ERROR;
 
         if (checkWinHorizontal(chip, row)) return handleWinner(chip);
 
@@ -72,7 +70,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     }
 
     private int insert(Player chip, int column) {
-        for(int i=0; i<6; i++) {
+        for(int i=0; i<ROWS; i++) {
             if(board[column][i] == null) {
                 board[column][i] = chip;
                 counter++;
@@ -104,9 +102,9 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         boolean wins = true;
         for (int i=0; i<COLS-2; i++) {
 
-            for (int j=i; j<4; j++) { // 4 magic number
+            for (int j=i; j<j; j++) { // 4 magic number
                 if(board[j][row] == null)
-                    return false;
+                    break;
                 wins &= board[j][row]==chip;
             }
         }

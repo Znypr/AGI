@@ -421,4 +421,5 @@ public class LogicTest {
         assertEquals(Result.TIE, o.throwChip(Player.BLUE, 6));
     }
 
+
 }
