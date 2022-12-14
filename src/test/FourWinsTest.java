@@ -421,15 +421,4 @@ public class FourWinsTest {
         assertEquals(Result.TIE, o.throwChip(Player.BLUE, 6));
     }
 
-    @Test
-    public void test() {
-        Logic o = new Logic();
-
-        o.throwChip(Player.RED, 1);
-        o.throwChip(Player.RED, 2);
-        o.throwChip(Player.BLUE, 3);
-        o.throwChip(Player.BLUE, 4);
-        Result r = o.throwChip(Player.BLUE, 5);
-        assertEquals(Result.NOTHING, r);
-    }
 }

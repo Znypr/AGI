@@ -1,10 +1,10 @@
 package test;
 
-import main.Logic;
-import main.Player;
-import main.Result;
-import org.junit.jupiter.api.Test;
+import main.*;
+
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TicTacToeTest {
 
     @Test
