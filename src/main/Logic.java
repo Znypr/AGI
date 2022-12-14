@@ -9,7 +9,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     private final int ROWS;
     private final int COLS;
     private Player[][] board = null;
-    private int counter = 0;
+    private int chipCounter = 0;
 
     public Logic (int col, int row ){
         COLS = col;
@@ -61,7 +61,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     }
 
     private Result checkTie(int maxChips) {
-        if (counter==maxChips)
+        if (chipCounter ==maxChips)
             return Result.TIE;
         else
             return Result.NOTHING;
@@ -77,7 +77,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         for(int i=0; i<ROWS; i++) {
             if(board[column][i] == null) {
                 board[column][i] = chip;
-                counter++;
+                chipCounter++;
                 return i;
             }
         }
@@ -89,7 +89,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         if(board[column][row]!=null)
             return false;
         board[column][row] = chip;
-        counter++;
+        chipCounter++;
         return true;
     }
 
@@ -102,7 +102,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     }
 
     private boolean checkWinHorizontal(Player chip, int row) {
-        int counter = 0;
+        int counter;
         for (int i = 0; i<COLS- MAX_WinLength +1; i++) {
             counter=0;
             for (int j = 0; j< MAX_WinLength; j++) {
@@ -118,7 +118,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     }
 
     private boolean checkWinVertical(Player chip, int column) {
-        int counter =0;
+        int counter;
         for(int i = 0; i<ROWS- MAX_WinLength +1; i++) {
             counter = 0;
             for(int j = 0; j< MAX_WinLength; j++) {
