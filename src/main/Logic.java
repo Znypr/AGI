@@ -2,9 +2,9 @@ package main;
 
 public class Logic implements FourWinsLogic, TicTacToeLogic {
 
-    private final int MAX_TicTacToe = 9;
-    private final int MAX_FourWins = 42;
-    private int MAX_Length;
+    private final int MaxChips_TicTacToe = 9;
+    private final int MaxChips_FourWins = 42;
+    private int MAX_WinLength;
 
     private final int ROWS;
     private final int COLS;
@@ -15,13 +15,13 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         COLS = col;
         ROWS = row;
         board = new Player[col][row];
-        MAX_Length = 3;
+        MAX_WinLength = 3;
     }
     public Logic (){
         COLS = 7;
         ROWS = 6;
         board = new Player[COLS][ROWS];
-        MAX_Length = 4;
+        MAX_WinLength = 4;
     }
 
     @Override
@@ -33,16 +33,13 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         if(!insert(chip, column, row))
             return Result.ERROR;
 
-        if(checkWinHorizontal(chip, row)) return handleWinner(chip);
+        if(checkWinHorizontal(chip, row)) return announceWinner(chip);
 
-        if (checkWinVertical(chip,column)) return handleWinner(chip);
+        if (checkWinVertical(chip,column)) return announceWinner(chip);
 
-        if (checkWinDiagonal(chip, row, column)) return handleWinner(chip);
+        if (checkWinDiagonal(chip, row, column)) return announceWinner(chip);
 
-        if (counter==MAX_TicTacToe)
-            return Result.TIE;
-
-        return Result.NOTHING;
+        return checkTie(MaxChips_TicTacToe);
     }
 
     @Override
@@ -54,19 +51,23 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
         int row = insert(chip,column);
         if(row < 0) return Result.ERROR;
 
-        if (checkWinHorizontal(chip, row)) return handleWinner(chip);
+        if (checkWinHorizontal(chip, row)) return announceWinner(chip);
 
-        if (checkWinVertical(chip,column)) return handleWinner(chip);
+        if (checkWinVertical(chip,column)) return announceWinner(chip);
 
-        if (checkWinDiagonal(chip, row, column)) return handleWinner(chip);
+        if (checkWinDiagonal(chip, row, column)) return announceWinner(chip);
 
-        if (counter==MAX_FourWins)
-            return Result.TIE;
-
-        return Result.NOTHING;
+        return checkTie(MaxChips_FourWins);
     }
 
-    private Result handleWinner(Player chip) {
+    private Result checkTie(int maxChips) {
+        if (counter==maxChips)
+            return Result.TIE;
+        else
+            return Result.NOTHING;
+    }
+
+    private Result announceWinner(Player chip) {
         if(chip == Player.BLUE)
             return Result.WIN_BLUE;
         return Result.WIN_RED;
@@ -102,14 +103,15 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
     private boolean checkWinHorizontal(Player chip, int row) {
         int counter = 0;
-        for (int i=0; i<COLS-2; i++) {
-            for (int j=0; j<3; j++) {
+        for (int i = 0; i<COLS- MAX_WinLength +1; i++) {
+            counter=0;
+            for (int j = 0; j< MAX_WinLength; j++) {
                 if(board[i+j][row] == null) {
                     break;
                 }
                 if(board[i+j][row]==chip) counter++;
                 else counter=0;
-                if (counter==MAX_Length) return true;
+                if (counter== MAX_WinLength) return true;
             }
         }
         return false;
@@ -117,14 +119,15 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
 
     private boolean checkWinVertical(Player chip, int column) {
         int counter =0;
-        for(int i=0; i<ROWS-2; i++) {
-            for(int j=0; j<3; j++) {
+        for(int i = 0; i<ROWS- MAX_WinLength +1; i++) {
+            counter = 0;
+            for(int j = 0; j< MAX_WinLength; j++) {
                 if(board[column][i+j]==null) {
                     break;
                 }
                 if(board[column][i+j]==chip) counter++;
                 else counter=0;
-                if(counter==MAX_Length) return true;
+                if(counter== MAX_WinLength) return true;
             }
         }
         return false;
@@ -133,7 +136,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
     private boolean checkWinDiagonal(Player chip, int row, int column){
 
         int counter = 1;
-        for(int i = 1; i < MAX_Length;i++){
+        for(int i = 1; i < MAX_WinLength; i++){
             if (column-i >= 0 && row-i >= 0) {
               if(board[column-i][row-i] == chip){
                   counter += 1;
@@ -141,12 +144,12 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==MAX_Length) {
+        if(counter== MAX_WinLength) {
             return true;
         }
 
         counter = 1;
-        for(int i = 1; i < MAX_Length;i++){
+        for(int i = 1; i < MAX_WinLength; i++){
             if (column+i < COLS && row+i < ROWS) {
                 if(board[column+i][row+i] == chip){
                     counter += 1;
@@ -154,12 +157,12 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==MAX_Length) {
+        if(counter== MAX_WinLength) {
             return true;
         }
 
         counter = 1;
-        for(int i = 1; i < MAX_Length;i++){
+        for(int i = 1; i < MAX_WinLength; i++){
             if (column - i >= 0 && row+i < ROWS) {
                 if(board[column-i][row+i] == chip){
                     counter += 1;
@@ -167,12 +170,12 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        if(counter==MAX_Length) {
+        if(counter== MAX_WinLength) {
             return true;
         }
 
         counter = 1;
-        for(int i = 1; i < MAX_Length;i++){
+        for(int i = 1; i < MAX_WinLength; i++){
             if (column + i < COLS && row-i >= 0) {
                 if(board[column+i][row-i] == chip){
                     counter += 1;
@@ -180,7 +183,7 @@ public class Logic implements FourWinsLogic, TicTacToeLogic {
             }
         }
 
-        return counter == MAX_Length;
+        return counter == MAX_WinLength;
     }
 
 }

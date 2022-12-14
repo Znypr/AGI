@@ -32,7 +32,6 @@ public class TicTacToeTest {
     }
 
 
-
     @Test
     public void checkWinHorizontalCase1() {
 
